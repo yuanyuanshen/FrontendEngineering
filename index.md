@@ -695,8 +695,11 @@ css 埋点：
 
 ## III. 项目优化
 
-- 规范项目中 Commit message
-- 项目中 CHANGRLOG.md 自动生成
+1. 规范项目中 Commit message
+
+2. 项目中 CHANGRLOG.md 自动生成
+
+<img src="./imgs/20.png" height="360"/>
 
 ---
 
@@ -730,5 +733,6 @@ css 埋点：
 16. [Cache-Control 之 no-cache 和 max-age=0](https://www.jianshu.com/p/1744780ddda0)
 17. [Commit message 代码提交规范](https://segmentfault.com/a/1190000019579621)
 18. [Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
+19. [git commit 、CHANGELOG 和版本发布的标准自动化](https://www.cnblogs.com/zivxiaowei/p/10089201.html)
 
 <center>-- End --</center>
