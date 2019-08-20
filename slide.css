@@ -54,6 +54,12 @@ center {
     font-weight: 700
 }
 
+right {
+    display: block;
+    text-align: -webkit-right;
+    font-weight: 700
+}
+
 table {
     border-collapse: collapse;
 }
