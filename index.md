@@ -619,12 +619,68 @@ webpack-dev-server 是我们开发 vue、react 时必备的工具，既然是一
 
 只需要少许修改就能 webpack-dev-server 当做 mock server 来用，并且对同一 URL 下的 GET、POST、PATCH 等不同的 HTTP METHOD 做分别处理，支持热切换。
 
-使用方法很简单，在 webpack.dev.conf.js 的 devServer 中添加新钩子 before，将所有请求交由 apiMocker 处理，然后当需要使用模拟数据时，只需要将请求的 URL 改为 webpack 服务器上既可。
+使用方法很简单，在 webpack.dev.conf.js 的 devServer 中添加新钩子 before，将所有请求交由 apiMocker 处理，然后当需要使用模拟数据时，只需要将请求的 URL 改为 webpack 服务器上既可。项目地址[webpack_api_mocker](https://github.com/yuanyuanshen/webpack_api_mocker)
 
 <center>
 <img src="./imgs/example.png" height="360"/>
 </center>
 
+---
+#### 安装
+
+```bash
+npm install mocker-api --save-dev
+```
+#### 使用
+package.json中配置
+
+```bash
+"dev-mock": "cross-env MOCK=true webpack-dev-server --inline --progress --config build/webpack.dev.conf.js"
+ ```
+
+ webpack.dev.conf.js中配置
+
+ ```bash
+    devServer: {
+        before (app) {
+            if (process.env.MOCK) {
+                apiMocker(app, path.resolve('mock/mocker'), {
+                    proxy: apiDomainMap,
+                    changeHost: true
+                })
+            }
+        }
+    }
+ ```
+---
+
+apiDomainMap.js配置
+
+ ```js
+let urls = {
+    'https://api.github.com': ['/search/repositories*', '/use/repositories*']
+}
+ ```
+
+mocker.js 配置
+
+ ```js
+const proxy = {
+    'GET /api/user': { id: 1, username: 'kenny', sex: 60 },
+    'GET /api/user/list': [
+        { id: 1, username: 'kenny', sex: 6 },
+        { id: 2, username: 'kenny', sex: 6 }
+    ],
+    'GET /api/common/list': [
+        { id: 1, console: '光远接口啥时候好' },
+        { id: 2, console: '光远接口好了么' },
+        { id: 2, console: '赛迪工单能通' },
+        { id: 2, console: '赛迪工单能调么' }
+    ]
+}
+module.exports = proxy
+
+ ```
 ---
 
 ### 附 3：前端埋点
