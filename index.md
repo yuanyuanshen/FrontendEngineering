@@ -592,7 +592,42 @@ npm run changelog
 
 ---
 
-### 附：前端埋点
+### 附 1：Fis
+
+FIS3 是面向前端的工程构建工具。解决前端工程中性能优化、资源加载（异步、同步、按需、预加载、依赖管理、合并、内嵌）、模块化开发、自动化工具、开发规范、代码部署等问题。
+
+http://fis.baidu.com/fis3/index.html
+
+---
+
+### 附 2：mock server
+
+在开发基于 api 交互、前后端分离的网页应用时，经常会遇到几个问题：
+
+- 前端页面已经编排好了，但是后台接口还没准备好
+- 我们希望服务器返回特定类型的数据，以测试某页面在特定条件下是否存在问题，但作为前端我们一般不会接触到后端代码和数据库，每次都找后端添加模拟数据又很麻烦。
+
+为解决这两个问题，最简单的解决办法就是搭建一个 mock server，专门返回需要的模拟数据。
+
+npm run devlocal 通过 express 搭建 3099 本地服务，然后把请求都转到本地服务上 Mock 数据，详细请见之前分享[express.js 的介绍及使用](https://segmentfault.com/a/1190000017561557)现在介绍另外一种常用的方法。
+
+webpack-dev-server 是我们开发 vue、react 时必备的工具，既然是一个服务器，那么我们是不是可以让他实现一个 mock server 的功能。
+
+**原理**：通过 webpack-dev-server 的 before 钩子，可以在 webpack-dev-server 上添加我们需要的 mock server 功能，而不需要另行搭建服务器。
+
+---
+
+只需要少许修改就能 webpack-dev-server 当做 mock server 来用，并且对同一 URL 下的 GET、POST、PATCH 等不同的 HTTP METHOD 做分别处理，支持热切换。
+
+使用方法很简单，在 webpack.dev.conf.js 的 devServer 中添加新钩子 before，将所有请求交由 apiMocker 处理，然后当需要使用模拟数据时，只需要将请求的 URL 改为 webpack 服务器上既可。
+
+<center>
+<img src="./imgs/example.png" height="360"/>
+</center>
+
+---
+
+### 附 3：前端埋点
 
 #### 目的
 
@@ -746,5 +781,6 @@ css 埋点：
 17. [Commit message 代码提交规范](https://segmentfault.com/a/1190000019579621)
 18. [Commit message 和 Change log 编写指南](http://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
 19. [git commit 、CHANGELOG 和版本发布的标准自动化](https://www.cnblogs.com/zivxiaowei/p/10089201.html)
+20. [在 webpack-dev-server 内添加 mock server](https://juejin.im/post/5afba2746fb9a07aaf356327)
 
 <center>-- End --</center>
