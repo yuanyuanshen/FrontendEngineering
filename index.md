@@ -1,3 +1,24 @@
+<center>
+<img src="./imgs/come.png" height="140"/>
+</center>
+
+#### 1.前端工程化介绍
+
+#### 2.前端性能优化（缓存&静态资源部署CDN）
+
+#### 3.commit 提交规范 CHANGELOG 自动生成
+
+#### 4.webpcak-dev-server 搭建 mock server
+
+<br/>
+<br/>
+
+<center>
+——— by yuanyuan
+</center>
+
+---
+
 - 《高性能网站建设指南》
 - 《高性能网站建设进阶指南》
 
@@ -626,61 +647,65 @@ webpack-dev-server 是我们开发 vue、react 时必备的工具，既然是一
 </center>
 
 ---
+
 #### 安装
 
 ```bash
 npm install mocker-api --save-dev
 ```
+
 #### 使用
-package.json中配置
+
+package.json 中配置
 
 ```bash
 "dev-mock": "cross-env MOCK=true webpack-dev-server --inline --progress --config build/webpack.dev.conf.js"
- ```
+```
 
- webpack.dev.conf.js中配置
+webpack.dev.conf.js 中配置
 
- ```bash
-    devServer: {
-        before (app) {
-            if (process.env.MOCK) {
-                apiMocker(app, path.resolve('mock/mocker'), {
-                    proxy: apiDomainMap,
-                    changeHost: true
-                })
-            }
-        }
-    }
- ```
+```bash
+   devServer: {
+       before (app) {
+           if (process.env.MOCK) {
+               apiMocker(app, path.resolve('mock/mocker'), {
+                   proxy: apiDomainMap,
+                   changeHost: true
+               })
+           }
+       }
+   }
+```
+
 ---
 
-apiDomainMap.js配置
+apiDomainMap.js 配置
 
- ```js
+```js
 let urls = {
-    'https://api.github.com': ['/search/repositories*', '/use/repositories*']
+  'https://api.github.com': ['/search/repositories*', '/use/repositories*']
 }
- ```
+```
 
 mocker.js 配置
 
- ```js
+```js
 const proxy = {
-    'GET /api/user': { id: 1, username: 'kenny', sex: 60 },
-    'GET /api/user/list': [
-        { id: 1, username: 'kenny', sex: 6 },
-        { id: 2, username: 'kenny', sex: 6 }
-    ],
-    'GET /api/common/list': [
-        { id: 1, console: '光远接口啥时候好' },
-        { id: 2, console: '光远接口好了么' },
-        { id: 2, console: '赛迪工单能通' },
-        { id: 2, console: '赛迪工单能调么' }
-    ]
+  'GET /api/user': { id: 1, username: 'kenny', sex: 60 },
+  'GET /api/user/list': [
+    { id: 1, username: 'kenny', sex: 6 },
+    { id: 2, username: 'kenny', sex: 6 }
+  ],
+  'GET /api/common/list': [
+    { id: 1, console: '光远接口啥时候好' },
+    { id: 2, console: '光远接口好了么' },
+    { id: 2, console: '赛迪工单能通' },
+    { id: 2, console: '赛迪工单能调么' }
+  ]
 }
 module.exports = proxy
+```
 
- ```
 ---
 
 ### 附 3：前端埋点

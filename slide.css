@@ -44,10 +44,6 @@ a>code {
     font-weight: 600
 }
 
-h4 {
-    color: #FF6600
-}
-
 center {
     display: block;
     text-align: -webkit-center;
@@ -57,7 +53,14 @@ center {
 right {
     display: block;
     text-align: -webkit-right;
-    font-weight: 700
+    font-weight: 700;
+    font-size: 20;
+}
+
+left {
+    display: block;
+    text-align: -webkit-left;
+    font-weight: 700;
 }
 
 table {
